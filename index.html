@@ -4,605 +4,968 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>杨航 &amp; 新娘 - 婚礼筹备进度</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --red: #c41e3a;
-      --gold: #d4a017;
-      --gold-light: #f5e6c8;
-      --cream: #fdf8f0;
-      --dark: #2c1810;
-      --text: #3d2b1f;
+      --primary-red: #C41E3A;
+      --deep-red: #8B0000;
+      --gold: #D4AF37;
+      --gold-light: #F5E6C8;
+      --gold-bright: #FFD700;
+      --cream: #FFF8F0;
+      --charcoal: #2D2D2D;
+      --text: #3D2B1F;
+      --text-light: #6B5344;
     }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
       background: var(--cream);
       color: var(--text);
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Decorative top border */
+    .top-bar {
+      height: 6px;
+      background: linear-gradient(90deg, var(--deep-red), var(--gold), var(--primary-red), var(--gold), var(--deep-red));
+      background-size: 200% 100%;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     body::before {
       content: '';
-      display: block;
-      height: 8px;
-      background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(196, 30, 58, 0.02) 0%, transparent 45%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 20px 16px 60px;
-    }
-
-    /* Header */
-    .header {
-      text-align: center;
-      padding: 40px 20px 30px;
+      padding: 0 20px 60px;
       position: relative;
+      z-index: 1;
     }
 
-    .header::before, .header::after {
-      content: '囍';
-      font-size: 48px;
-      color: var(--red);
+    /* HERO */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 70px 20px 50px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
       position: absolute;
-      top: 20px;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .header::before { left: 20px; }
-    .header::after { right: 20px; }
 
-    .header h1 {
-      font-size: 2.2em;
-      color: var(--red);
+    .floating-xi {
+      position: absolute;
+      font-size: 120px;
+      color: rgba(196, 30, 58, 0.06);
+      font-family: "Noto Serif SC", serif;
+      animation: floatXi 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .floating-xi:nth-child(1) { top: -20px; left: 5%; animation-delay: 0s; }
+    .floating-xi:nth-child(2) { top: 30px; right: 8%; animation-delay: 1.5s; font-size: 80px; }
+    .floating-xi:nth-child(3) { bottom: 20px; left: 15%; animation-delay: 3s; font-size: 60px; }
+
+    @keyframes floatXi {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(3deg); }
+    }
+
+    .hero-double-xi {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .hero-double-xi span {
+      font-size: 80px;
+      color: var(--primary-red);
+      text-shadow: 0 2px 20px rgba(196, 30, 58, 0.3);
+      animation: heroXiIn 1s ease-out backwards;
+      font-family: "Noto Serif SC", serif;
+    }
+    .hero-double-xi span:nth-child(2) { animation-delay: 0.15s; }
+
+    @keyframes heroXiIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .hero-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: 2.6em;
+      font-weight: 900;
+      color: var(--primary-red);
+      letter-spacing: 8px;
       margin-bottom: 8px;
-      letter-spacing: 6px;
     }
 
-    .header .subtitle {
+    .hero-subtitle {
+      font-family: "Noto Serif SC", serif;
       font-size: 1.1em;
       color: var(--gold);
-      letter-spacing: 4px;
-      margin-bottom: 16px;
+      letter-spacing: 12px;
+      margin-bottom: 36px;
+      font-weight: 600;
+    }
+
+    .deco-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto 32px;
+      max-width: 400px;
+    }
+    .deco-divider::before,
+    .deco-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .deco-divider .diamond {
+      width: 8px; height: 8px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
     }
 
     .basic-info {
       display: flex;
       justify-content: center;
-      gap: 32px;
+      gap: 20px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      margin-bottom: 40px;
     }
 
-    .basic-info .info-item {
-      font-size: 1.05em;
+    .info-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--gold-light);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-size: 0.95em;
       color: var(--text);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .info-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.15);
+    }
+    .info-pill .emoji { font-size: 1.2em; }
+    .info-pill .label { color: var(--text-light); }
+    .info-pill .value { color: var(--primary-red); font-weight: 700; }
+
+    /* COUNTDOWN */
+    .countdown-wrap {
+      margin: 0 auto 50px;
+      max-width: 500px;
     }
 
-    .basic-info .info-item span {
-      color: var(--red);
-      font-weight: bold;
+    .countdown-label {
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+      font-weight: 500;
     }
 
-    /* Progress */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .countdown-item {
+      text-align: center;
+      background: linear-gradient(145deg, var(--primary-red), var(--deep-red));
+      color: white;
+      border-radius: 12px;
+      padding: 14px 18px;
+      min-width: 68px;
+      box-shadow: 0 4px 16px rgba(196, 30, 58, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .countdown-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+    .countdown-item .num {
+      font-size: 2em;
+      font-weight: 900;
+      font-family: "Noto Serif SC", serif;
+      line-height: 1;
+    }
+    .countdown-item .unit {
+      font-size: 0.7em;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+    .countdown-sep {
+      display: flex;
+      align-items: center;
+      font-size: 2em;
+      color: var(--gold);
+      font-weight: 900;
+      padding-top: 12px;
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink { 50% { opacity: 0.3; } }
+
+    /* PROGRESS */
     .progress-section {
       background: white;
-      border-radius: 12px;
-      padding: 24px;
-      margin: 24px 0;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--gold-light);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin: 0 0 40px;
+      box-shadow: 0 4px 24px rgba(196, 30, 58, 0.08);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      position: relative;
+      overflow: hidden;
     }
+
+    .progress-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--deep-red), var(--gold), var(--primary-red));
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .progress-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: 1.2em;
+      color: var(--primary-red);
+      font-weight: 700;
+    }
+
+    .progress-numbers { font-size: 0.9em; color: var(--text-light); }
+    .progress-numbers strong { color: var(--primary-red); }
 
     .progress-bar-wrap {
       position: relative;
-      height: 28px;
-      background: #f0e6d2;
-      border-radius: 14px;
+      height: 20px;
+      background: linear-gradient(180deg, #f5e6d3, #fde8c8);
+      border-radius: 10px;
       overflow: hidden;
-      margin: 12px 0 8px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
     }
 
     .progress-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--red), #e63946);
-      border-radius: 14px;
-      transition: width 1s ease;
+      background: linear-gradient(90deg, var(--deep-red), var(--primary-red), var(--gold));
+      border-radius: 10px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-right: 10px;
-      color: white;
-      font-size: 0.85em;
-      font-weight: bold;
+      min-width: 40px;
     }
 
-    .progress-text {
-      text-align: center;
-      font-size: 1.3em;
-      color: var(--red);
-      font-weight: bold;
-      margin-top: 8px;
-    }
-
-    /* Section */
-    .section-title {
-      font-size: 1.3em;
-      color: var(--red);
-      padding: 12px 20px;
-      background: linear-gradient(90deg, #fff5f5, white);
-      border-left: 4px solid var(--red);
+    .progress-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px; right: 2px;
+      height: 6px;
+      background: rgba(255,255,255,0.25);
       border-radius: 4px;
-      margin: 28px 0 12px;
+    }
+
+    .progress-percent {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.75em;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .progress-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.82em;
+    }
+    .progress-footer .done { color: #27ae60; }
+    .progress-footer .todo { color: var(--primary-red); }
+
+    /* SECTION TITLE */
+    .section-title {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      margin: 44px 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--gold-light);
     }
 
-    .section-title .emoji { font-size: 1.2em; }
+    .section-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      flex-shrink: 0;
+    }
 
-    /* Cards */
+    .section-title.done .section-icon { background: linear-gradient(135deg, #e8f8f0, #d4f5e3); }
+    .section-title.pending .section-icon { background: linear-gradient(135deg, #fde8e8, #fcd9d9); }
+    .section-title.urgent .section-icon { background: linear-gradient(135deg, #fdf3e7, #fce8cc); }
+    .section-title.timeline .section-icon { background: linear-gradient(135deg, #f3e8fd, #e8d4f5); }
+
+    .section-title h2 {
+      font-family: "Noto Serif SC", serif;
+      font-size: 1.25em;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .section-title .section-count {
+      margin-left: auto;
+      font-size: 0.85em;
+      color: var(--text-light);
+      background: var(--cream);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--gold-light);
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      border: 1px solid #f0e6d2;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      transition: transform 0.2s;
+      gap: 14px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid transparent;
     }
 
-    .card:hover { transform: translateY(-1px); }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(196, 30, 58, 0.1);
+    }
 
-    .card .icon {
-      font-size: 1.4em;
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+    }
+
+    .card.done::before { background: linear-gradient(180deg, #27ae60, #2ecc71); }
+    .card.todo::before { background: linear-gradient(180deg, var(--primary-red), #e63946); }
+    .card.urgent::before { background: linear-gradient(180deg, #e67e22, #f39c12); }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
       flex-shrink: 0;
-      margin-top: 2px;
     }
 
-    .card .content { flex: 1; }
+    .card.done .card-icon { background: linear-gradient(135deg, #e8f8f0, #f0faf4); }
+    .card.todo .card-icon { background: linear-gradient(135deg, #fde8e8, #fff5f5); }
+    .card.urgent .card-icon { background: linear-gradient(135deg, #fdf3e7, #fffbf5); }
 
-    .card .title {
-      font-size: 1.05em;
-      font-weight: bold;
+    .card-body { flex: 1; min-width: 0; }
+
+    .card-title {
+      font-size: 1em;
+      font-weight: 600;
       color: var(--text);
       margin-bottom: 4px;
     }
 
-    .card .desc {
-      font-size: 0.9em;
-      color: #888;
+    .card-desc {
+      font-size: 0.85em;
+      color: var(--text-light);
+      line-height: 1.4;
     }
 
-    .card.done {
-      border-left: 4px solid #2ecc71;
-      background: #fafffe;
-    }
-
-    .card.todo {
-      border-left: 4px solid var(--red);
-      background: #fff9f9;
-    }
-
-    .card.urgent {
-      border-left: 4px solid #e67e22;
-      background: #fffbf5;
-    }
-
-    .card .tag {
-      font-size: 0.75em;
-      padding: 2px 8px;
-      border-radius: 10px;
+    .card-badge {
       flex-shrink: 0;
+      font-size: 0.72em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      align-self: flex-start;
+      margin-top: 2px;
     }
 
-    .tag-done { background: #e8f8f0; color: #27ae60; }
-    .tag-todo { background: #fde8e8; color: var(--red); }
-    .tag-urgent { background: #fdf3e7; color: #e67e22; }
+    .card.done .card-badge { background: #e8f8f0; color: #27ae60; }
+    .card.todo .card-badge { background: #fde8e8; color: var(--primary-red); }
+    .card.urgent .card-badge { background: #fdf3e7; color: #e67e22; }
 
-    /* Timeline */
+    .card-grid.single .card { grid-column: 1 / -1; }
+
+    /* TIMELINE */
     .timeline {
       position: relative;
-      padding-left: 28px;
-      margin: 12px 0;
+      padding-left: 40px;
+      margin: 8px 0;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 10px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, var(--gold), var(--red), var(--gold));
+      left: 14px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), var(--primary-red), var(--gold));
       border-radius: 2px;
     }
 
     .timeline-item {
       position: relative;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      background: white;
+      border-radius: 14px;
+      padding: 18px 22px;
+      border: 1px solid var(--gold-light);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: transform 0.2s;
     }
+    .timeline-item:hover { transform: translateX(4px); }
 
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -22px;
-      top: 6px;
-      width: 14px;
-      height: 14px;
-      background: var(--gold);
-      border: 3px solid var(--cream);
+      left: -32px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
-      box-shadow: 0 0 0 2px var(--gold);
+      border: 3px solid var(--gold-light);
+      background: white;
+      box-shadow: 0 0 0 3px var(--gold);
     }
 
-    .timeline-item:nth-child(1)::before { background: #2ecc71; box-shadow: 0 0 0 2px #2ecc71; }
-    .timeline-item:nth-child(2)::before { background: var(--red); box-shadow: 0 0 0 2px var(--red); }
-    .timeline-item:nth-child(3)::before { background: var(--gold); }
-    .timeline-item:nth-child(4)::before { background: #9b59b6; box-shadow: 0 0 0 2px #9b59b6; }
+    .timeline-item:nth-child(1)::before { box-shadow: 0 0 0 3px #27ae60; border-color: #e8f8f0; }
+    .timeline-item:nth-child(2)::before { box-shadow: 0 0 0 3px var(--primary-red); border-color: #fde8e8; }
+    .timeline-item:nth-child(3)::before { box-shadow: 0 0 0 3px var(--gold); }
+    .timeline-item:nth-child(4)::before { box-shadow: 0 0 0 3px #9b59b6; border-color: #f3e8fd; }
 
-    .timeline-item .time {
-      font-size: 0.85em;
+    .timeline-time {
+      font-size: 0.8em;
       color: var(--gold);
-      font-weight: bold;
+      font-weight: 700;
+      letter-spacing: 1px;
       margin-bottom: 4px;
     }
 
-    .timeline-item .event {
-      font-size: 1.05em;
-      font-weight: bold;
+    .timeline-event {
+      font-family: "Noto Serif SC", serif;
+      font-size: 1.1em;
+      font-weight: 700;
       color: var(--text);
+      margin-bottom: 4px;
     }
 
-    .timeline-item .location {
-      font-size: 0.88em;
-      color: #888;
-      margin-top: 2px;
+    .timeline-location {
+      font-size: 0.85em;
+      color: var(--text-light);
     }
 
-    /* Footer */
+    /* FOOTER */
     .footer {
       text-align: center;
-      padding: 30px 0 10px;
-      color: #bbb;
-      font-size: 0.85em;
+      padding: 50px 0 20px;
+      position: relative;
     }
 
     .footer::before {
       content: '';
       display: block;
-      width: 60px;
+      width: 120px;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto 16px;
+      margin: 0 auto 24px;
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header h1 { font-size: 1.6em; letter-spacing: 3px; }
-      .header::before, .header::after { font-size: 32px; }
-      .basic-info { gap: 16px; }
-      .header { padding: 30px 10px 20px; }
+    .footer-xi {
+      font-size: 36px;
+      color: var(--primary-red);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .footer p {
+      font-size: 0.85em;
+      color: var(--text-light);
+      letter-spacing: 2px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .hero-title { font-size: 1.8em; letter-spacing: 4px; }
+      .hero-double-xi span { font-size: 56px; }
+      .floating-xi { display: none; }
+      .countdown { gap: 8px; }
+      .countdown-item { min-width: 56px; padding: 10px 10px; }
+      .countdown-item .num { font-size: 1.5em; }
+      .card-grid { grid-template-columns: 1fr; }
+      .card-grid.single .card { grid-column: 1; }
+      .basic-info { gap: 10px; }
+      .info-pill { padding: 6px 14px; font-size: 0.88em; }
+      .progress-section { padding: 24px 20px; }
+      .hero { padding: 50px 16px 36px; }
     }
   </style>
 </head>
 <body>
 
+<div class="top-bar"></div>
+
 <div class="container">
 
-  <!-- Header -->
-  <div class="header">
-    <h1>杨航 &amp; 新娘</h1>
-    <div class="subtitle">婚 礼 筹 备 进 度</div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="floating-xi">囍</div>
+    <div class="floating-xi">囍</div>
+    <div class="floating-xi">囍</div>
+
+    <div class="hero-double-xi">
+      <span>囍</span>
+      <span>囍</span>
+    </div>
+
+    <h1 class="hero-title">杨航 &amp; 新娘</h1>
+    <div class="hero-subtitle">婚 · 礼 · 筹 · 备</div>
+
+    <div class="deco-divider"><div class="diamond"></div></div>
+
     <div class="basic-info">
-      <div class="info-item">📅 婚期：<span>2026年10月6日</span></div>
-      <div class="info-item">📍 地点：<span>山东老家村里</span></div>
-      <div class="info-item">🎎 形式：<span>中式婚礼</span></div>
+      <div class="info-pill">
+        <span class="emoji">📅</span>
+        <span class="label">婚期</span>
+        <span class="value">2026年10月6日</span>
+      </div>
+      <div class="info-pill">
+        <span class="emoji">📍</span>
+        <span class="label">地点</span>
+        <span class="value">山东老家村里</span>
+      </div>
+      <div class="info-pill">
+        <span class="emoji">🎎</span>
+        <span class="label">形式</span>
+        <span class="value">中式婚礼</span>
+      </div>
     </div>
   </div>
 
-  <!-- Progress -->
+  <!-- COUNTDOWN -->
+  <div class="countdown-wrap">
+    <div class="countdown-label">距 离 婚 礼 还 有</div>
+    <div class="countdown">
+      <div class="countdown-item">
+        <div class="num" id="days">—</div>
+        <div class="unit">天</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item">
+        <div class="num" id="hours">—</div>
+        <div class="unit">时</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item">
+        <div class="num" id="minutes">—</div>
+        <div class="unit">分</div>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-item">
+        <div class="num" id="seconds">—</div>
+        <div class="unit">秒</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
   <div class="progress-section">
+    <div class="progress-header">
+      <div class="progress-title">🏮 筹备完成度</div>
+      <div class="progress-numbers"><strong>7</strong> / 23 项</div>
+    </div>
     <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+      <div class="progress-bar-fill" id="progressBar" style="width: 0%">
+        <span class="progress-percent" id="progressPercent">30%</span>
+      </div>
     </div>
-    <div class="progress-text" id="progressText">筹备完成度：0%</div>
-  </div>
-
-  <!-- Done Section -->
-  <div class="section-title">
-    <span class="emoji">✅</span> 已完成项目
-  </div>
-
-  <div class="card done">
-    <div class="icon">🏨</div>
-    <div class="content">
-      <div class="title">喜宴场地（饭店）</div>
-      <div class="desc">已预订</div>
+    <div class="progress-footer">
+      <span class="done">✅ 已完成 7 项</span>
+      <span class="todo">⏳ 待定 16 项</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
   </div>
 
-  <div class="card done">
-    <div class="icon">🎺</div>
-    <div class="content">
-      <div class="title">响班（吹响器）</div>
-      <div class="desc">已定</div>
+  <!-- DONE -->
+  <div class="section-title done">
+    <div class="section-icon">✅</div>
+    <h2>已完成项目</h2>
+    <span class="section-count">7 项</span>
+  </div>
+
+  <div class="card-grid single">
+    <div class="card done">
+      <div class="card-icon">🏨</div>
+      <div class="card-body">
+        <div class="card-title">喜宴场地（饭店）</div>
+        <div class="card-desc">已预订</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <div class="card done">
-    <div class="icon">🚗</div>
-    <div class="content">
-      <div class="title">婚车车队</div>
-      <div class="desc">已定</div>
+    <div class="card done">
+      <div class="card-icon">🎺</div>
+      <div class="card-body">
+        <div class="card-title">响班（吹响器）</div>
+        <div class="card-desc">已定</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <div class="card done">
-    <div class="icon">👗</div>
-    <div class="content">
-      <div class="title">衣服 + 跟妆套餐</div>
-      <div class="desc">已交定金 500 元 · 总价 2200 元 · 尾款 1700 元</div>
+    <div class="card done">
+      <div class="card-icon">🚗</div>
+      <div class="card-body">
+        <div class="card-title">婚车车队</div>
+        <div class="card-desc">已定</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <div class="card done">
-    <div class="icon">💄</div>
-    <div class="content">
-      <div class="title">化妆师（跟妆）</div>
-      <div class="desc">已交定金</div>
+    <div class="card done">
+      <div class="card-icon">👗</div>
+      <div class="card-body">
+        <div class="card-title">衣服 + 跟妆套餐</div>
+        <div class="card-desc">已交定金 500 元 · 总价 2200 元 · 尾款 1700 元</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <div class="card done">
-    <div class="icon">🥻</div>
-    <div class="content">
-      <div class="title">新娘秀禾服 / 婚服 / 敬酒服</div>
-      <div class="desc">已交定金</div>
+    <div class="card done">
+      <div class="card-icon">💄</div>
+      <div class="card-body">
+        <div class="card-title">化妆师（跟妆）</div>
+        <div class="card-desc">已交定金</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <div class="card done">
-    <div class="icon">🎽</div>
-    <div class="content">
-      <div class="title">新郎秀禾 / 婚服</div>
-      <div class="desc">已交定金</div>
+    <div class="card done">
+      <div class="card-icon">🥻</div>
+      <div class="card-body">
+        <div class="card-title">新娘秀禾服 / 婚服 / 敬酒服</div>
+        <div class="card-desc">已交定金</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-done">✅ 完成</span>
-  </div>
-
-  <!-- Pending - People -->
-  <div class="section-title">
-    <span class="emoji">⏳</span> 待定项目 — 人员
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🎤</div>
-    <div class="content">
-      <div class="title">主持人</div>
-      <div class="desc">需有中式婚礼经验</div>
+    <div class="card done">
+      <div class="card-icon">🎽</div>
+      <div class="card-body">
+        <div class="card-title">新郎秀禾 / 婚服</div>
+        <div class="card-desc">已交定金</div>
+      </div>
+      <span class="card-badge">✅ 完成</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
   </div>
 
-  <div class="card todo">
-    <div class="icon">🎥</div>
-    <div class="content">
-      <div class="title">摄像（视频）</div>
-      <div class="desc">1个还是2个？</div>
+  <!-- PENDING - PEOPLE -->
+  <div class="section-title pending">
+    <div class="section-icon">⏳</div>
+    <h2>待定项目 — 人员</h2>
+    <span class="section-count">5 项</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card todo">
+      <div class="card-icon">🎤</div>
+      <div class="card-body">
+        <div class="card-title">主持人</div>
+        <div class="card-desc">需有中式婚礼经验</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">📷</div>
-    <div class="content">
-      <div class="title">跟拍（照片）</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🎥</div>
+      <div class="card-body">
+        <div class="card-title">摄像（视频）</div>
+        <div class="card-desc">1个还是2个？</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">👥</div>
-    <div class="content">
-      <div class="title">秀娘</div>
-      <div class="desc">人数未定</div>
+    <div class="card todo">
+      <div class="card-icon">📷</div>
+      <div class="card-body">
+        <div class="card-title">跟拍（照片）</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🤵</div>
-    <div class="content">
-      <div class="title">伴郎伴娘</div>
-      <div class="desc">要不要？</div>
+    <div class="card todo">
+      <div class="card-icon">👥</div>
+      <div class="card-body">
+        <div class="card-title">秀娘</div>
+        <div class="card-desc">人数未定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <!-- Pending - Items -->
-  <div class="section-title">
-    <span class="emoji">⏳</span> 待定项目 — 物品 / 场地
-  </div>
-
-  <div class="card urgent">
-    <div class="icon">🏨</div>
-    <div class="content">
-      <div class="title">新娘酒店（郓城县）</div>
-      <div class="desc">⏰ 紧急 — 需尽快预订</div>
+    <div class="card todo" style="grid-column:1/-1;">
+      <div class="card-icon">🤵</div>
+      <div class="card-body">
+        <div class="card-title">伴郎伴娘</div>
+        <div class="card-desc">要不要？</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-urgent">⚡ 紧急</span>
   </div>
 
-  <div class="card todo">
-    <div class="icon">💐</div>
-    <div class="content">
-      <div class="title">婚车装饰</div>
-      <div class="desc">待定</div>
+  <!-- PENDING - ITEMS -->
+  <div class="section-title pending">
+    <div class="section-icon">⏳</div>
+    <h2>待定项目 — 物品 / 场地</h2>
+    <span class="section-count">11 项</span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card urgent">
+      <div class="card-icon">🏨</div>
+      <div class="card-body">
+        <div class="card-title">新娘酒店（郓城县）</div>
+        <div class="card-desc">⚡ 紧急 — 需尽快预订</div>
+      </div>
+      <span class="card-badge">⚡ 紧急</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🧧</div>
-    <div class="content">
-      <div class="title">红包（堵门）</div>
-      <div class="desc">待定</div>
+    <div class="card urgent">
+      <div class="card-icon">📸</div>
+      <div class="card-body">
+        <div class="card-title">婚纱照</div>
+        <div class="card-desc">❌ 完全没定 — 建议提前3个月以上拍摄</div>
+      </div>
+      <span class="card-badge">⚡ 紧急</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🧧</div>
-    <div class="content">
-      <div class="title">改口红包</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">💐</div>
+      <div class="card-body">
+        <div class="card-title">婚车装饰</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">💐</div>
-    <div class="content">
-      <div class="title">捧花</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🧧</div>
+      <div class="card-body">
+        <div class="card-title">红包（堵门）</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🍬</div>
-    <div class="content">
-      <div class="title">喜糖 / 喜烟</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🧧</div>
+      <div class="card-body">
+        <div class="card-title">改口红包</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🏮</div>
-    <div class="content">
-      <div class="title">背景板 / 舞台 / 红毯 / 灯笼</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">💐</div>
+      <div class="card-body">
+        <div class="card-title">捧花</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🔥</div>
-    <div class="content">
-      <div class="title">跨火盆 / 马鞍 / 盖头 / 天地桌</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🍬</div>
+      <div class="card-body">
+        <div class="card-title">喜糖 / 喜烟</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">👔</div>
-    <div class="content">
-      <div class="title">双方父母服装</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🏮</div>
+      <div class="card-body">
+        <div class="card-title">背景板 / 舞台 / 红毯 / 灯笼</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🍷</div>
-    <div class="content">
-      <div class="title">烟酒茶 / 喜糖盒</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🔥</div>
+      <div class="card-body">
+        <div class="card-title">跨火盆 / 马鞍 / 盖头 / 天地桌</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🪑</div>
-    <div class="content">
-      <div class="title">宾客座位</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">👔</div>
+      <div class="card-body">
+        <div class="card-title">双方父母服装</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card todo">
-    <div class="icon">🎁</div>
-    <div class="content">
-      <div class="title">伴手礼</div>
-      <div class="desc">待定</div>
+    <div class="card todo">
+      <div class="card-icon">🍷</div>
+      <div class="card-body">
+        <div class="card-title">烟酒茶 / 喜糖盒</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-todo">❌ 待定</span>
-  </div>
-
-  <div class="card urgent">
-    <div class="icon">📸</div>
-    <div class="content">
-      <div class="title">婚纱照</div>
-      <div class="desc">❌ 完全没定 — 建议提前3个月以上拍摄</div>
+    <div class="card todo">
+      <div class="card-icon">🪑</div>
+      <div class="card-body">
+        <div class="card-title">宾客座位</div>
+        <div class="card-desc">待定</div>
+      </div      </div>
+      <span class="card-badge">❌ 待定</span>
     </div>
-    <span class="tag tag-urgent">⚡ 紧急</span>
+    <div class="card todo">
+      <div class="card-icon">🎁</div>
+      <div class="card-body">
+        <div class="card-title">伴手礼</div>
+        <div class="card-desc">待定</div>
+      </div>
+      <span class="card-badge">❌ 待定</span>
+    </div>
   </div>
 
-  <!-- Timeline -->
-  <div class="section-title">
-    <span class="emoji">📋</span> 婚礼当天流程
+  <!-- TIMELINE -->
+  <div class="section-title timeline">
+    <div class="section-icon">📋</div>
+    <h2>婚礼当天流程</h2>
+    <span class="section-count">4 步</span>
   </div>
 
   <div class="timeline">
     <div class="timeline-item">
-      <div class="time">早上 7:00 – 8:00</div>
-      <div class="event">接亲</div>
-      <div class="location">📍 新娘住郓城县酒店</div>
+      <div class="timeline-time">早上 7:00 – 8:00</div>
+      <div class="timeline-event">接亲</div>
+      <div class="timeline-location">📍 新娘住郓城县酒店</div>
     </div>
     <div class="timeline-item">
-      <div class="time">上午</div>
-      <div class="event">中式婚礼仪式</div>
-      <div class="location">📍 村里院子</div>
+      <div class="timeline-time">上午</div>
+      <div class="timeline-event">中式婚礼仪式</div>
+      <div class="timeline-location">📍 村里院子</div>
     </div>
     <div class="timeline-item">
-      <div class="time">中午</div>
-      <div class="event">喜宴</div>
-      <div class="location">📍 饭店</div>
+      <div class="timeline-time">中午</div>
+      <div class="timeline-event">喜宴</div>
+      <div class="timeline-location">📍 饭店</div>
     </div>
     <div class="timeline-item">
-      <div class="time">下午</div>
-      <div class="event">送客</div>
-      <div class="location"></div>
+      <div class="timeline-time">下午</div>
+      <div class="timeline-event">送客</div>
+      <div class="timeline-location"></div>
     </div>
   </div>
 
+  <!-- FOOTER -->
   <div class="footer">
-    杨航 &amp; 新娘 · 2026年10月6日 · 山东
+    <div class="footer-xi">囍</div>
+    <p>杨航 &amp; 新娘 · 2026年10月6日 · 山东</p>
   </div>
 
 </div>
 
 <script>
-  // Count items
-  const doneItems = document.querySelectorAll('.card.done').length; // 7
-  const totalTodoPeople = 5;
-  const totalTodoItems = 11;
-  const totalTodo = totalTodoPeople + totalTodoItems;
-  const total = doneItems + totalTodo; // 23
+  const wedding = new Date('2026-10-06T00:00:00');
 
-  // Progress: weight done items as complete, todos as 0
+  function updateCountdown() {
+    const now = new Date();
+    const diff = wedding - now;
+    if (diff <= 0) {
+      document.getElementById('days').textContent = '0';
+      document.getElementById('hours').textContent = '0';
+      document.getElementById('minutes').textContent = '0';
+      document.getElementById('seconds').textContent = '0';
+      return;
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  const doneItems = 7;
+  const total = 23;
   const percent = Math.round((doneItems / total) * 100);
 
   setTimeout(() => {
-    document.getElementById('progressBar').style.width = percent + '%';
-    document.getElementById('progressText').textContent = '筹备完成度：' + percent + '%';
-  }, 300);
+    const bar = document.getElementById('progressBar');
+    const pct = document.getElementById('progressPercent');
+    bar.style.width = percent + '%';
+    pct.textContent = percent + '%';
+  }, 500);
 </script>
 
 </body>
