@@ -3,927 +3,811 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>杨航 & 阿芬 — 婚礼筹备</title>
+  <title>婚礼筹备清单 — 杨航 & 阿芬</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-red: #C41E3A;
-      --deep-red: #8B0000;
-      --gold: #D4AF37;
-      --gold-light: #F5E6C8;
-      --gold-bright: #FFD700;
-      --cream: #FFF8F0;
-      --charcoal: #2D2D2D;
-      --text: #3D2B1F;
-      --text-light: #6B5344;
-      --green: #2E7D32;
-      --green-light: #E8F5E9;
+      --red: #B22222;
+      --red-dark: #8B1A1A;
+      --red-paper: #F7F0E8;
+      --gold: #C59B3A;
+      --gold-light: #E8D5A3;
+      --ink: #2C1A0E;
+      --ink-light: #5C3D2E;
+      --vermillion: #D94040;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: var(--cream);
-      color: var(--text);
+      font-family: "Noto Serif SC", "SimSun", "宋体", serif;
+      background: var(--red-paper);
+      color: var(--ink);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ===== TOP HEADER ===== */
-    .top-header {
-      background: linear-gradient(135deg, var(--primary-red) 0%, var(--deep-red) 100%);
-      text-align: center;
-      padding: 28px 20px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .top-header::before {
+    /* ===== 喜纸纹背景 ===== */
+    body::before {
       content: '';
-      position: absolute;
+      position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(180, 30, 30, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(180, 30, 30, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(180, 30, 30, 0.03) 0%, transparent 40%);
       pointer-events: none;
+      z-index: 0;
     }
-    .top-header h1 {
-      font-family: "Noto Serif SC", serif;
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    .top-header .subtitle {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.85rem;
-      margin-top: 6px;
-      letter-spacing: 0.15em;
-      position: relative;
-    }
-    .top-xi {
-      position: absolute;
-      font-size: 5rem;
-      color: rgba(255,255,255,0.06);
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: serif;
-    }
-    .top-xi.left { left: 20px; }
-    .top-xi.right { right: 20px; }
 
-    /* ===== COUNTDOWN ===== */
-    .countdown-strip {
-      background: var(--deep-red);
+    /* ===== 主容器 ===== */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== 标题区 ===== */
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    .header-double {
+      font-size: 2.2rem;
+      color: var(--red);
+      letter-spacing: 0.3em;
+      font-family: "Noto Serif SC", serif;
+      margin-bottom: 8px;
+    }
+    .header-title {
+      font-family: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+    .header-sub {
+      font-size: 0.8rem;
+      color: var(--ink-light);
+      letter-spacing: 0.2em;
+    }
+    .header-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .header-divider::before,
+    .header-divider::after {
+      content: '';
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .header-divider-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    /* ===== 倒计时 ===== */
+    .countdown-box {
       display: flex;
       justify-content: center;
-      gap: 0;
+      align-items: center;
+      gap: 6px;
+      margin: 12px 0 24px;
       padding: 14px 20px;
+      background: var(--red);
+      border-radius: 4px;
+      position: relative;
     }
+    .countdown-box::before,
+    .countdown-box::after {
+      content: '◀';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem;
+    }
+    .countdown-box::before { left: 10px; }
+    .countdown-box::after { right: 10px; content: '▶'; }
     .countdown-item {
       text-align: center;
-      min-width: 60px;
     }
     .countdown-num {
-      font-family: "Noto Serif SC", serif;
-      font-size: 2rem;
-      font-weight: 900;
+      font-family: "ZCOOL QingKe HuangYou", "Noto Serif SC", sans-serif;
+      font-size: 1.8rem;
       color: var(--gold);
       line-height: 1;
     }
     .countdown-label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       color: rgba(255,255,255,0.7);
       letter-spacing: 0.1em;
       margin-top: 2px;
     }
     .countdown-sep {
-      font-size: 1.8rem;
-      color: var(--gold);
-      opacity: 0.5;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.4);
       line-height: 1;
-      align-self: center;
-      padding-bottom: 6px;
+      padding-bottom: 4px;
     }
 
-    /* ===== TAB NAV ===== */
+    /* ===== Tab导航 ===== */
     .tab-nav {
-      background: #fff;
       display: flex;
+      background: transparent;
       border-bottom: 2px solid var(--gold-light);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 28px;
     }
     .tab-btn {
       flex: 1;
-      padding: 14px 8px;
+      padding: 10px 4px;
       border: none;
       background: transparent;
-      font-family: "Noto Sans SC", sans-serif;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text-light);
+      font-family: "Noto Serif SC", serif;
+      font-size: 0.82rem;
+      color: var(--ink-light);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.2s;
       border-bottom: 3px solid transparent;
       margin-bottom: -2px;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
+      position: relative;
     }
-    .tab-btn:hover {
-      color: var(--primary-red);
-      background: rgba(196,30,58,0.04);
-    }
+    .tab-btn:hover { color: var(--red); }
     .tab-btn.active {
-      color: var(--primary-red);
-      border-bottom-color: var(--primary-red);
+      color: var(--red);
+      border-bottom-color: var(--red);
       font-weight: 700;
-    }
-    .tab-btn .tab-icon {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 2px;
     }
 
-    /* ===== TAB CONTENT ===== */
-    .tab-content {
-      display: none;
-      padding: 24px 16px 40px;
-      animation: fadeIn 0.2s ease;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ===== Tab内容 ===== */
+    .tab-content { display: none; padding-bottom: 20px; }
+    .tab-content.active { display: block; }
 
-    /* ===== PROGRESS BAR ===== */
-    .progress-wrap {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      border: 1px solid var(--gold-light);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .progress-title {
-      font-family: "Noto Serif SC", serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .progress-pct {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary-red);
-    }
-    .progress-bar-bg {
-      height: 10px;
-      background: var(--gold-light);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary-red), var(--gold));
-      border-radius: 99px;
-      width: 0%;
-      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .progress-stats {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 8px;
-      font-size: 0.78rem;
-      color: var(--text-light);
-    }
-
-    /* ===== SECTION HEADER ===== */
-    .section-header {
-      margin-bottom: 16px;
-    }
-    .section-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .section-title-row {
+    /* ===== 区块标题 ===== */
+    .block-title {
       display: flex;
       align-items: center;
       gap: 8px;
+      margin: 24px 0 10px;
+      padding-bottom: 6px;
     }
-    .section-icon {
-      font-size: 1.2rem;
-    }
-    .section-title {
+    .block-num {
       font-family: "Noto Serif SC", serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--red);
     }
-    .section-count {
-      margin-left: auto;
-      background: var(--gold-light);
-      color: var(--text);
+    .block-name {
+      font-family: "ZCOOL XiaoWei", "Noto Serif SC", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.1em;
+    }
+    .block-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--gold-light), transparent);
+    }
+    .block-count {
       font-size: 0.72rem;
-      font-weight: 600;
+      color: var(--ink-light);
+      background: rgba(197, 155, 58, 0.12);
       padding: 2px 8px;
-      border-radius: 99px;
+      border-radius: 2px;
+      border: 1px solid var(--gold-light);
     }
 
-    /* ===== CARD GRID ===== */
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
+    /* ===== 清单条目 ===== */
+    .item-list {
+      list-style: none;
     }
-    @media (max-width: 480px) {
-      .card-grid { grid-template-columns: 1fr; }
-    }
-    .card {
-      background: #fff;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
-      border: 1px solid rgba(0,0,0,0.04);
-    }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .card-inner {
-      padding: 16px;
+    .item-row {
+      display: flex;
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px dashed rgba(197, 155, 58, 0.3);
       position: relative;
     }
-    .card-icon {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
+    .item-row:last-child { border-bottom: none; }
+    .item-bullet {
+      font-size: 0.9rem;
+      margin-right: 10px;
+      color: var(--gold);
+      flex-shrink: 0;
     }
-    .card-eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--text-light);
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
-    .card-title {
-      font-family: "Noto Serif SC", serif;
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-      line-height: 1.4;
-    }
-    .card-desc {
-      font-size: 0.78rem;
-      color: var(--text-light);
+    .item-name {
+      font-size: 0.95rem;
+      color: var(--ink);
+      flex: 1;
       line-height: 1.5;
     }
-    .card-badge {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 99px;
-      margin-top: 8px;
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted var(--gold-light);
+      margin: 0 8px 2px;
+      min-width: 20px;
     }
-    .card.urgent { border-left: 3px solid var(--primary-red); }
-    .card.urgent .card-badge { background: rgba(196,30,58,0.1); color: var(--primary-red); }
-    .card.todo { border-left: 3px solid var(--gold); }
-    .card.todo .card-badge { background: var(--gold-light); color: var(--text); }
-    .card.done { border-left: 3px solid var(--green); }
-    .card.done .card-badge { background: var(--green-light); color: var(--green); }
-    .card.pending-group { border-left: 3px solid var(--primary-red); }
-
-    /* ===== PENDING GROUP ===== */
-    .pending-group-title {
-      font-family: "Noto Serif SC", serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin: 20px 0 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--gold-light);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .urgent-badge {
-      background: var(--primary-red);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 99px;
+    .item-status {
+      font-size: 0.82rem;
+      color: var(--ink-light);
+      flex-shrink: 0;
       letter-spacing: 0.05em;
     }
+    .item-status.done { color: var(--vermillion); }
+    .item-status.pending { color: var(--ink-light); }
 
-    /* ===== TIMELINE ===== */
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--primary-red), var(--gold));
+    /* ===== 印章效果 ===== */
+    .seal {
+      display: inline-block;
+      border: 2px solid var(--vermillion);
+      color: var(--vermillion);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 5px;
       border-radius: 2px;
+      letter-spacing: 0.05em;
+      transform: rotate(-3deg);
+      opacity: 0.85;
+      vertical-align: middle;
+      margin-left: 4px;
     }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 24px;
+    .seal.urgent-seal {
+      border-color: var(--red);
+      color: var(--red);
+      animation: pulse 2s infinite;
     }
-    .timeline-item:last-child { margin-bottom: 0; }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -24px;
-      top: 6px;
-      width: 12px;
-      height: 12px;
-      background: var(--primary-red);
-      border-radius: 50%;
-      border: 2px solid var(--cream);
-      box-shadow: 0 0 0 2px var(--gold);
-    }
-    .timeline-time {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-    .timeline-event {
-      font-family: "Noto Serif SC", serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .timeline-location {
-      font-size: 0.8rem;
-      color: var(--text-light);
-    }
-    .timeline-detail {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      margin-top: 4px;
-      padding-left: 12px;
-      border-left: 2px solid var(--gold-light);
+    @keyframes pulse {
+      0%, 100% { opacity: 0.85; }
+      50% { opacity: 0.5; }
     }
 
-    /* ===== BASIC INFO GRID ===== */
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
+    /* ===== 备注文字 ===== */
+    .item-note {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      margin-left: 20px;
+      margin-top: 1px;
+      font-style: italic;
     }
-    @media (max-width: 480px) {
-      .info-grid { grid-template-columns: 1fr; }
+
+    /* ===== 分隔区块 ===== */
+    .sep-block {
+      text-align: center;
+      padding: 6px 0;
+      margin: 4px 0;
+      position: relative;
     }
-    .info-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 18px;
-      border: 1px solid var(--gold-light);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    .sep-block::before,
+    .sep-block::after {
+      content: '━━━━━━━━━━━━━━━━';
+      font-size: 0.7rem;
+      color: var(--gold-light);
+      overflow: hidden;
+      display: block;
+      white-space: nowrap;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== 基本信息区 ===== */
+    .info-row {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gold-light);
     }
     .info-label {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--ink-light);
       letter-spacing: 0.15em;
-      color: var(--gold);
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-transform: uppercase;
+      min-width: 70px;
     }
     .info-value {
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .info-tag {
+      margin-left: auto;
+      font-size: 0.68rem;
+      background: rgba(197,155,58,0.15);
+      color: var(--gold);
+      padding: 1px 6px;
+      border-radius: 2px;
+      border: 1px solid var(--gold-light);
+    }
+    .info-tag.done-tag {
+      background: rgba(217,64,64,0.1);
+      color: var(--vermillion);
+      border-color: rgba(217,64,64,0.3);
+    }
+
+    /* ===== 婚礼流程 ===== */
+    .timeline-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .timeline-row {
+      display: flex;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gold-light);
+    }
+    .timeline-num {
+      font-family: "ZCOOL QingKe HuangYou", sans-serif;
+      font-size: 1.2rem;
+      color: var(--red);
+      width: 28px;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+    .timeline-content { flex: 1; }
+    .timeline-event {
       font-family: "Noto Serif SC", serif;
       font-size: 1rem;
       font-weight: 700;
-      color: var(--text);
-      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .timeline-time {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 2px;
+    }
+    .timeline-location {
+      font-size: 0.78rem;
+      color: var(--gold);
     }
 
-    /* ===== FOOTER ===== */
+    /* ===== 底部 ===== */
     .footer {
       text-align: center;
-      padding: 32px 20px 40px;
-      background: linear-gradient(to bottom, transparent, rgba(196,30,58,0.04));
+      padding: 30px 0 20px;
     }
     .footer-xi {
-      font-size: 3rem;
-      color: var(--primary-red);
-      margin-bottom: 8px;
+      font-size: 2rem;
+      color: var(--red);
+      letter-spacing: 0.3em;
+      margin-bottom: 6px;
     }
-    .footer p {
-      font-family: "Noto Serif SC", serif;
-      color: var(--text-light);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
+    .footer-text {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      letter-spacing: 0.15em;
+    }
+
+    /* ===== 紧急标记 ===== */
+    .urgent-row {
+      background: rgba(180, 30, 30, 0.04);
+      border-left: 3px solid var(--red);
+      padding-left: 10px;
+      margin-left: -10px;
     }
   </style>
 </head>
 <body>
 
-  <!-- TOP HEADER -->
-  <div class="top-header">
-    <span class="top-xi left">囍</span>
-    <span class="top-xi right">囍</span>
-    <h1>🎎 杨航 & 阿芬</h1>
-    <div class="subtitle">婚礼筹备进度</div>
+<div class="container">
+
+  <!-- ===== 标题 ===== -->
+  <div class="header">
+    <div class="header-double">囍</div>
+    <div class="header-title">婚 礼 筹 备 清 单</div>
+    <div class="header-sub">杨航 · 阿芬 · 丙午年玖月</div>
+    <div class="header-divider">
+      <span class="header-divider-icon">✦</span>
+    </div>
   </div>
 
-  <!-- COUNTDOWN -->
-  <div class="countdown-strip">
+  <!-- ===== 倒计时 ===== -->
+  <div class="countdown-box">
     <div class="countdown-item">
       <div class="countdown-num" id="days">--</div>
       <div class="countdown-label">天</div>
     </div>
-    <div class="countdown-sep">:</div>
+    <div class="countdown-sep">—</div>
     <div class="countdown-item">
       <div class="countdown-num" id="hours">--</div>
       <div class="countdown-label">时</div>
     </div>
-    <div class="countdown-sep">:</div>
+    <div class="countdown-sep">—</div>
     <div class="countdown-item">
       <div class="countdown-num" id="minutes">--</div>
       <div class="countdown-label">分</div>
     </div>
-    <div class="countdown-sep">:</div>
+    <div class="countdown-sep">—</div>
     <div class="countdown-item">
       <div class="countdown-num" id="seconds">--</div>
       <div class="countdown-label">秒</div>
     </div>
   </div>
 
-  <!-- TAB NAV -->
+  <!-- ===== Tab导航 ===== -->
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="basic">
-      <span class="tab-icon">🏠</span>基本信息
-    </button>
-    <button class="tab-btn" data-tab="done">
-      <span class="tab-icon">✅</span>已完成
-    </button>
-    <button class="tab-btn" data-tab="pending">
-      <span class="tab-icon">❌</span>待定
-    </button>
-    <button class="tab-btn" data-tab="timeline">
-      <span class="tab-icon">📋</span>婚礼流程
-    </button>
+    <button class="tab-btn active" data-tab="basic">基本信息</button>
+    <button class="tab-btn" data-tab="done">已完成</button>
+    <button class="tab-btn" data-tab="pending">待定</button>
+    <button class="tab-btn" data-tab="timeline">婚礼流程</button>
   </div>
 
   <!-- =============================================
-       TAB 1: BASIC INFO
+       基本信息
   ============================================== -->
   <div class="tab-content active" id="basic">
-
-    <div class="progress-wrap">
-      <div class="progress-header">
-        <div class="progress-title">总体进度</div>
-        <div class="progress-pct" id="progressPercent">30%</div>
-      </div>
-      <div class="progress-bar-bg">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <div class="progress-stats">
-        <span>已完成 <strong>7</strong> 项</span>
-        <span>待定 <strong>16</strong> 项</span>
-      </div>
+    <div class="block-title">
+      <span class="block-num">壹</span>
+      <span class="block-name">基本信息</span>
+      <span class="block-line"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">婚　期</span>
+      <span class="info-value">2026年10月6日</span>
+      <span class="info-tag done-tag">已定</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">地　点</span>
+      <span class="info-value">山东省 · 郓城县</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">婚　俗</span>
+      <span class="info-value">中式传统婚礼</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">喜　宴</span>
+      <span class="info-value">饭店（已订好）</span>
+      <span class="info-tag done-tag">✓</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">婚　房</span>
+      <span class="info-value">村里老宅院子</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">新娘住处</span>
+      <span class="info-value">郓城县酒店（待定）</span>
+      <span class="info-tag">⚡</span>
     </div>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-label">婚期</div>
-        <div class="info-value">2026年10月6日</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label">地点</div>
-        <div class="info-value">山东 · 郓城县</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label">婚礼形式</div>
-        <div class="info-value">中式婚礼</div>
-      </div>
-      <div class="info-card">
-        <div class="info-label">喜宴场地</div>
-        <div class="info-value">饭店（已订好）</div>
-      </div>
+    <div class="block-title" style="margin-top:28px;">
+      <span class="block-num">贰</span>
+      <span class="block-name">筹备进度</span>
+      <span class="block-line"></span>
+      <span class="block-count">7 / 23 项</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">已完成</span>
+      <span class="info-value" style="color:var(--vermillion);">7 项</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">待　定</span>
+      <span class="info-value">16 项</span>
+      <span class="info-tag">进行中</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">完成率</span>
+      <span class="info-value" style="color:var(--red);">约 30%</span>
     </div>
   </div>
 
   <!-- =============================================
-       TAB 2: DONE
+       已完成
   ============================================== -->
   <div class="tab-content" id="done">
-    <div class="section-header">
-      <div class="section-eyebrow">COMPLETED</div>
-      <div class="section-title-row">
-        <div class="section-icon">✅</div>
-        <h2 class="section-title">已完成项目</h2>
-        <span class="section-count">7 项</span>
-      </div>
+    <div class="block-title">
+      <span class="block-num">壹</span>
+      <span class="block-name">已完成项目</span>
+      <span class="block-line"></span>
+      <span class="block-count">7 项</span>
     </div>
-    <div class="card-grid">
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">🏨</div>
-          <div class="card-eyebrow">已完成 · 场地</div>
-          <div class="card-title">喜宴场地</div>
-          <div class="card-desc">饭店已订好</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">🎺</div>
-          <div class="card-eyebrow">已完成 · 人员</div>
-          <div class="card-title">响班</div>
-          <div class="card-desc">吹响器的已定</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">🚗</div>
-          <div class="card-eyebrow">已完成 · 物品</div>
-          <div class="card-title">婚车车队</div>
-          <div class="card-desc">婚车车队已定</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">👗</div>
-          <div class="card-eyebrow">已完成 · 服务</div>
-          <div class="card-title">衣服 + 跟妆套餐</div>
-          <div class="card-desc">已交定金500元，总价2200元</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">💄</div>
-          <div class="card-eyebrow">已完成 · 人员</div>
-          <div class="card-title">化妆师</div>
-          <div class="card-desc">跟妆已定</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">👘</div>
-          <div class="card-eyebrow">已完成 · 物品</div>
-          <div class="card-title">新娘秀禾/婚服/敬酒服</div>
-          <div class="card-desc">新娘服装已备好</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-      <div class="card done">
-        <div class="card-inner">
-          <div class="card-icon">🤵</div>
-          <div class="card-eyebrow">已完成 · 物品</div>
-          <div class="card-title">新郎秀禾/婚服</div>
-          <div class="card-desc">新郎服装已备好</div>
-          <span class="card-badge">✅ 完成</span>
-        </div>
-      </div>
-    </div>
+
+    <ul class="item-list">
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">喜宴场地</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已订好</span>
+        <span class="seal">订</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">响班</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已订好</span>
+        <span class="seal">订</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">婚车车队</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已订好</span>
+        <span class="seal">订</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">衣服 + 跟妆套餐</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已付定金</span>
+        <span class="seal">订</span>
+      </li>
+      <li class="item-note">总价2200元，已付500元</li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">化妆师（跟妆）</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已订好</span>
+        <span class="seal">订</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">新娘秀禾服 / 婚服 / 敬酒服</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已备好</span>
+        <span class="seal">备</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">■</span>
+        <span class="item-name">新郎秀禾 / 婚服</span>
+        <span class="item-dots"></span>
+        <span class="item-status done">已备好</span>
+        <span class="seal">备</span>
+      </li>
+    </ul>
   </div>
 
   <!-- =============================================
-       TAB 3: PENDING
+       待定
   ============================================== -->
   <div class="tab-content" id="pending">
-
-    <div class="section-header">
-      <div class="section-eyebrow">PENDING</div>
-      <div class="section-title-row">
-        <div class="section-icon urgent">⚡</div>
-        <h2 class="section-title">待定项目</h2>
-        <span class="section-count">16 项</span>
-      </div>
+    <div class="block-title">
+      <span class="block-num">壹</span>
+      <span class="block-name">紧急事项</span>
+      <span class="block-line"></span>
+      <span class="block-count">⚡ 尽快处理</span>
     </div>
 
-    <!-- URGENT -->
-    <div class="pending-group-title">⚡ 紧急 <span class="urgent-badge">尽快处理</span></div>
-    <div class="card-grid">
-      <div class="card urgent">
-        <div class="card-inner">
-          <div class="card-icon">🏨</div>
-          <div class="card-eyebrow">⚡ 紧急 · 场地</div>
-          <div class="card-title">新娘酒店</div>
-          <div class="card-desc">郓城县 — 需尽快预订</div>
-          <span class="card-badge">⚡ 紧急</span>
-        </div>
-      </div>
-      <div class="card urgent">
-        <div class="card-inner">
-          <div class="card-icon">📸</div>
-          <div class="card-eyebrow">⚡ 紧急 · 物品</div>
-          <div class="card-title">婚纱照</div>
-          <div class="card-desc">完全没定，建议提前3个月以上拍摄</div>
-          <span class="card-badge">⚡ 紧急</span>
-        </div>
-      </div>
-    </div>
+    <ul class="item-list">
+      <li class="item-row urgent-row">
+        <span class="item-bullet">◆</span>
+        <span class="item-name">新娘酒店（郓城县）</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+        <span class="seal urgent-seal">急</span>
+      </li>
+      <li class="item-row urgent-row">
+        <span class="item-bullet">◆</span>
+        <span class="item-name">婚纱照</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+        <span class="seal urgent-seal">急</span>
+      </li>
+      <li class="item-note">建议提前3个月以上拍摄，周期紧张</li>
+    </ul>
 
-    <!-- 人员 -->
-    <div class="pending-group-title">👥 人员 <span style="font-size:0.7rem;color:var(--text-light);font-weight:400;">5 项</span></div>
-    <div class="card-grid">
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🎤</div>
-          <div class="card-eyebrow">待定 · 人员</div>
-          <div class="card-title">主持人</div>
-          <div class="card-desc">需有中式婚礼经验</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🎥</div>
-          <div class="card-eyebrow">待定 · 人员</div>
-          <div class="card-title">摄像（视频）</div>
-          <div class="card-desc">1个还是2个？</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">📷</div>
-          <div class="card-eyebrow">待定 · 人员</div>
-          <div class="card-title">跟拍（照片）</div>
-          <div class="card-desc">待定</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">💐</div>
-          <div class="card-eyebrow">待定 · 人员</div>
-          <div class="card-title">秀娘</div>
-          <div class="card-desc">人数未定</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">👫</div>
-          <div class="card-eyebrow">待定 · 人员</div>
-          <div class="card-title">伴郎伴娘</div>
-          <div class="card-desc">待定</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-    </div>
+    <div class="sep-block" style="margin:20px 0 10px;">—— 人员待定 · 伍项 ——</div>
 
-    <!-- 物品 -->
-    <div class="pending-group-title">🎁 物品 <span style="font-size:0.7rem;color:var(--text-light);font-weight:400;">9 项</span></div>
-    <div class="card-grid">
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🚗</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">婚车装饰</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🧧</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">红包（堵门）</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🧧</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">改口红包</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">💐</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">捧花</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🍬</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">喜糖 / 喜烟</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🏮</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">背景板 / 舞台 / 红毯 / 灯笼</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🔥</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">跨火盆 / 马鞍 / 盖头 / 天地桌</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">👔</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">双方父母服装</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🍷</div>
-          <div class="card-eyebrow">待定 · 物品</div>
-          <div class="card-title">烟酒茶 / 喜糖盒</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-    </div>
+    <ul class="item-list">
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">主持人</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-note">需有中式婚礼主持经验</li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">摄像（视频）</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-note">1个还是2个？</li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">跟拍（照片）</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">秀娘</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-note">人数未定，需与化妆师配合</li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">伴郎 / 伴娘</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+    </ul>
+
+    <div class="sep-block" style="margin:20px 0 10px;">—— 物品待定 · 玖项 ——</div>
+
+    <ul class="item-list">
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">婚车装饰</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">红包（堵门）</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">改口红包</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">捧花</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">喜糖 / 喜烟</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">背景板 / 舞台 / 红毯 / 灯笼</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">跨火盆 / 马鞍 / 盖头 / 天地桌</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">双方父母服装</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">烟酒茶 / 喜糖盒</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+    </ul>
   </div>
 
   <!-- =============================================
-       TAB 4: TIMELINE
+       婚礼流程
   ============================================== -->
   <div class="tab-content" id="timeline">
-
-    <div class="section-header">
-      <div class="section-eyebrow">WEDDING DAY</div>
-      <div class="section-title-row">
-        <div class="section-icon">📋</div>
-        <h2 class="section-title">婚礼当天流程</h2>
-        <span class="section-count">4 步</span>
-      </div>
+    <div class="block-title">
+      <span class="block-num">壹</span>
+      <span class="block-name">婚礼当天流程</span>
+      <span class="block-line"></span>
     </div>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-time">早上 7:00 – 8:00</div>
-        <div class="timeline-event">🎉 接亲</div>
-        <div class="timeline-location">📍 新娘住郓城县酒店</div>
-        <div class="timeline-detail">新郎及亲友团前往新娘所在酒店接亲</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">上午</div>
-        <div class="timeline-event">🏮 中式婚礼仪式</div>
-        <div class="timeline-location">📍 村里院子</div>
-        <div class="timeline-detail">拜天地、掀盖头、三拜等传统中式仪式</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">中午</div>
-        <div class="timeline-event">🍽️ 喜宴</div>
-        <div class="timeline-location">📍 饭店（已订好）</div>
-        <div class="timeline-detail">宴请亲朋好友，共享喜庆时刻</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">下午</div>
-        <div class="timeline-event">👋 送客</div>
-        <div class="timeline-location">📍 饭店</div>
-        <div class="timeline-detail">送别宾客，婚礼圆满礼成</div>
-      </div>
-    </div>
+    <ul class="timeline-list">
+      <li class="timeline-row">
+        <span class="timeline-num">一</span>
+        <div class="timeline-content">
+          <div class="timeline-event">接亲</div>
+          <div class="timeline-time">早上 7:00 — 8:00</div>
+          <div class="timeline-location">新娘住郓城县酒店</div>
+        </div>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-num">二</span>
+        <div class="timeline-content">
+          <div class="timeline-event">中式婚礼仪式</div>
+          <div class="timeline-time">上午</div>
+          <div class="timeline-location">村里老宅院子</div>
+          <div class="item-note" style="margin-left:0; margin-top:3px;">拜天地 · 掀盖头 · 三拜 · 跨火盆等</div>
+        </div>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-num">三</span>
+        <div class="timeline-content">
+          <div class="timeline-event">喜宴</div>
+          <div class="timeline-time">中午</div>
+          <div class="timeline-location">饭店（已订好）</div>
+        </div>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-num">四</span>
+        <div class="timeline-content">
+          <div class="timeline-event">送客</div>
+          <div class="timeline-time">下午</div>
+          <div class="timeline-location">饭店</div>
+        </div>
+      </li>
+    </ul>
 
-    <!-- Ritual items -->
-    <div class="section-header" style="margin-top:32px;">
-      <div class="section-eyebrow">CEREMONY</div>
-      <div class="section-title-row">
-        <div class="section-icon">🔥</div>
-        <h2 class="section-title">中式仪式用品</h2>
-        <span class="section-count">待定</span>
-      </div>
+    <div class="block-title" style="margin-top:28px;">
+      <span class="block-num">贰</span>
+      <span class="block-name">仪式用品</span>
+      <span class="block-line"></span>
     </div>
-    <div class="card-grid">
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🔥</div>
-          <div class="card-eyebrow">待定 · 仪式</div>
-          <div class="card-title">跨火盆</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🐴</div>
-          <div class="card-eyebrow">待定 · 仪式</div>
-          <div class="card-title">马鞍</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🌹</div>
-          <div class="card-eyebrow">待定 · 仪式</div>
-          <div class="card-title">盖头</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-      <div class="card pending-group">
-        <div class="card-inner">
-          <div class="card-icon">🪑</div>
-          <div class="card-eyebrow">待定 · 仪式</div>
-          <div class="card-title">天地桌</div>
-          <span class="card-badge">❌ 待定</span>
-        </div>
-      </div>
-    </div>
+    <ul class="item-list">
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">天地桌</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">火盆 / 马鞍</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">盖头 / 秤杆</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+      <li class="item-row">
+        <span class="item-bullet">□</span>
+        <span class="item-name">喜烛 / 香</span>
+        <span class="item-dots"></span>
+        <span class="item-status pending">待定</span>
+      </li>
+    </ul>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ===== 底部 ===== -->
   <div class="footer">
     <div class="footer-xi">囍</div>
-    <p>杨航 & 阿芬 · 2026年10月6日 · 山东</p>
+    <div class="footer-text">杨航 · 阿芬 · 2026年10月6日 · 山东郓城</div>
   </div>
 
+</div>
+
 <script>
-  // ===== COUNTDOWN =====
+  // ===== 倒计时 =====
   const wedding = new Date('2026-10-06T00:00:00');
 
   function updateCountdown() {
     const now = new Date();
     const diff = wedding - now;
     if (diff <= 0) {
-      document.getElementById('days').textContent = '0';
-      document.getElementById('hours').textContent = '0';
-      document.getElementById('minutes').textContent = '0';
-      document.getElementById('seconds').textContent = '0';
+      ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '0');
       return;
     }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('days').textContent = d;
+    document.getElementById('hours').textContent = h.toString().padStart(2,'0');
+    document.getElementById('minutes').textContent = m.toString().padStart(2,'0');
+    document.getElementById('seconds').textContent = s.toString().padStart(2,'0');
   }
-
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ===== PROGRESS BAR =====
-  const doneItems = 7;
-  const total = 23;
-  const percent = Math.round((doneItems / total) * 100);
-
-  setTimeout(() => {
-    const bar = document.getElementById('progressBar');
-    const pct = document.getElementById('progressPercent');
-    if (bar) bar.style.width = percent + '%';
-    if (pct) pct.textContent = percent + '%';
-  }, 300);
-
-  // ===== TAB SWITCHING =====
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  tabBtns.forEach(btn => {
+  // ===== Tab切换 =====
+  document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const tabId = btn.dataset.tab;
-
-      // Update buttons
-      tabBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       btn.classList.add('active');
-
-      // Update content
-      tabContents.forEach(content => {
-        content.classList.remove('active');
-        if (content.id === tabId) {
-          content.classList.add('active');
-        }
-      });
+      document.getElementById(btn.dataset.tab).classList.add('active');
     });
   });
 </script>
